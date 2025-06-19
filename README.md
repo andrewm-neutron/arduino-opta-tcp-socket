@@ -3,7 +3,8 @@ Python code to communicate with Arduino Opta PLC running OPC UA server with TCP 
 
 Purpose:
 - Allow remote control of [Arduino Opta PLC](https://www.arduino.cc/pro/hardware-arduino-opta/) and connected expansion modules via TCP socket over Ethernet with Python.
-- Compatibility with [SICS](http://lns00.psi.ch/sics/design/sics.html). 
+- Compatibility with [SICS](http://lns00.psi.ch/sics/design/sics.html).
+- Written using [miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main).
 
 ## First iteration
 To start, a Python client and Python server to communicate via TCP socket on same computer (loopback). 
@@ -14,14 +15,14 @@ Purpose:
 - Implement some error handling before actual hardware is involved. 
 
 ## Second iteration
-Python client on computer talks to Python server via TCP on same computer, and TCP server talks to Arduino Opta via Ethernet using OPC UA.
+Python client on computer talks to Python server via TCP on same computer, and TCP server talks to Arduino Opta via Ethernet using [OPC UA](https://opcfoundation.org/about/opc-technologies/opc-ua/).
 
 Purpose:
 - Introduce communication with Arduino Opta PLC running OPC UA server.
 
 
 ## Third iteration
-Python client on computer talks to Python server on Arduino Portenta or similar running microphython, which talks to Arduino Opta via Ethernet using OPC UA.
+Python client on computer talks to Python server on Arduino Portenta or similar running [microphython](https://micropython.org/), which talks to Arduino Opta via Ethernet using OPC UA.
 
 Purpose:
 - Eliminate need for a computer to act as the Python server for communication with the Arduino Opta PLC. 
@@ -31,10 +32,11 @@ SICS client talks to Python server on Arduino Portenta or similar running microp
 
 ## Dependencies
 
-The following packages are required on top of a basic miniconda install:
+The following packages are required on top of a basic miniconda install (`pip install ...` in miniconda prompt terminal):
 - opcua
 - opcua-client
-- 
+- crypto
+- crypto
 
 ## How to set it up
 

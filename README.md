@@ -7,7 +7,7 @@ Purpose:
 - Written using [miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main).
 
 ## First iteration
-To start, a Python client and Python server to communicate via TCP socket on same computer (loopback). 
+To start, a Python client and Python server to communicate via TCP socket on same computer (loopback). Following from this [Real Python article](https://realpython.com/python-sockets/).
 
 Purpose:
 - Establish reliable two-way communication between client and server using TCP socket.

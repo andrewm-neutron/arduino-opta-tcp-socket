@@ -12,7 +12,12 @@ To start, a Python client and Python server to communicate via TCP socket on sam
 Purpose:
 - Establish reliable two-way communication between client and server using TCP socket.
 - Have server interpret user commands in a useful way for controlling an Arduino Opta PLC.
-- Implement some error handling before actual hardware is involved. 
+- Implement some error handling before actual hardware is involved.
+
+To run:
+- Open and run `echo-server-andrewm.py` first.
+- Then open and run `echo-client.andrewm.py`.
+- Type commands into the latter, and see the former respond. 
 
 ## Second iteration
 Python client on computer talks to Python server via TCP on same computer, and TCP server talks to Arduino Opta via Ethernet using [OPC UA](https://opcfoundation.org/about/opc-technologies/opc-ua/).

@@ -7,7 +7,7 @@ Purpose:
 - Written using [miniconda](https://www.anaconda.com/docs/getting-started/miniconda/main).
 
 ## First iteration
-To start, a Python client and Python server to communicate via TCP socket on same computer (loopback). 
+To start, a Python client and Python server to communicate via TCP socket on same computer (loopback). Following from this [Real Python article](https://realpython.com/python-sockets/) to build an echo client and server.
 
 Purpose:
 - Establish reliable two-way communication between client and server using TCP socket.
@@ -52,7 +52,11 @@ To get it working:
   - Install [Arduino IDE](https://www.arduino.cc/en/software/) and use the Library Manager to install each of the packages described in the tutorial (Opta core - Arduino mbed OS Opta Boards, arduino_json, arduinoBLE (Bluetooth - useful for testing but not necessary), arduino_OPC_UA, portentaEthernet, optaBlue, mbed_rtc_time).
   - Assemble the Opta PLC and expansion modules (up to two modules supported by OPC-UA), and test as required with [Arduino PLC IDE](https://www.arduino.cc/pro/software-plc-ide/). 
   - Upload [Arduino Opta OPC-UA server sketch](https://github.com/arduino-libraries/Arduino_OPC_UA/blob/main/examples/opta_opcua_server/opta_opcua_server.ino) to the PLC.
-  - Find the IP address assigned to the PLC - note that the address derived from the above tutorial will be for the WAN connection, not the local LAN - best to use your router or `arp -a` to find the local IP address.
-  - Use [PuTTY](https://www.putty.org/) or similar to check communications with the OPC-UA server running on the PLC. Communicate via Serial on the COM port used in the Arduino IDE, speed 9600, .... check details....
+  - Use [PuTTY](https://www.putty.org/) or similar to check communications with the OPC-UA server running on the PLC. Communicate via Serial on the COM port used in the Arduino IDE (in this case, COM3), at speed 9600. This should also report the IP address for the OPC-UA server running on the Arduino Opta. This local IP address can also be found from your router or `arp -a`, and note that the address derived from the Ethernet tutorial for the Opta PLC will be for the WAN connection and not the local LAN.  
+    
+    <img src="https://github.com/user-attachments/assets/c2ff14ae-2231-4002-aa01-bd4973b49ec2" width=50% height=50%>
+    <img src="https://github.com/user-attachments/assets/ee74186e-2143-40ec-9a18-472fdf765440" width=75% height=75%>
   - Find the `opcua-client` installed via pip, default path for miniconda3 on Windows is `C:\Users\<UserName>\miniconda3\envs\<EnvName>\Scripts\opcua-client.exe`, and launch the executable.
   - In the address bar, type `opc.tcp://<IPaddress>:4840`. Note that the command window for the client lists the active OPC-UA servers running, including the localhost and any server simulators being used such as [the Integration Objects OPC-UA Server Simulator](https://integrationobjects.com/sioth-opc/sioth-opc-unified-architecture/opc-ua-server-simulator/). This can be used to explore the configuration of the PLC and to identify the relevant [NodeId values](https://opcua-asyncio.readthedocs.io/en/latest/usage/common/node-nodeid.html) of the controller and attached modules. Note that other connections to the OPA-UA server such as through the Arduino IDE must be closed first.
+    <img src="https://github.com/user-attachments/assets/fef9b096-8d0a-456a-ab91-27eaac563fa8" width=75% height=75%>
+

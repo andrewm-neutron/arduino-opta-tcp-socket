@@ -26,21 +26,36 @@ def client_quit():
     print(colored('Client asked to quit connection', 'red')) 
 
 def client_stop():
-    print(colored('Client asked to stop server', 'red')) 
+    print(colored('Client asked to stop server', 'red'))
+    
+def unknown_cmd():
+    print(colored('Client entered unknown command', 'magenta'))
+    
+def empty_cmd():
+    print(colored('Empty string sent', 'yellow'))
 
 # Interpreter for user string input from client
 def read_string_interpreter(readString,talkToCommsClient,talkToArduino,listenToCommsClient):
+    knownCmd = False
+    # if not readString:
+    #     empty_cmd()
     if re.search("help", readString, re.IGNORECASE):
+        knownCmd = True
         help_info()
     if re.search("arduino", readString, re.IGNORECASE):
+        knownCmd = True
         arduino_info()
     if re.search("stop", readString, re.IGNORECASE):
+        knownCmd = True
         client_stop()
         talkToCommsClient = False   # close comms with server
         listenToCommsClient = False
     if re.search("quit", readString, re.IGNORECASE):
+        knownCmd = True
         client_quit()
         talkToCommsClient = False   # close comms with server
+    # if not knownCmd:
+    #     unknown_cmd()
     return talkToCommsClient,talkToArduino,listenToCommsClient
 
 # Listening to Comms Client
@@ -62,5 +77,8 @@ while listenToCommsClient:
                 #print(colored('Remote client says: ','cyan') + dataString)  # THIS LINE KILLS IT
                 if not data:
                     break
-                conn.sendall(data)
+                addrString = f"{addr}"
+                sendString = 'Client ' + addrString + ' says ' + dataString
+                sendData = sendString.encode()
+                conn.sendall(sendData)
             #print(colored('Remote client says: ','cyan') + stringFromClient)  # THIS LINE KILLS IT

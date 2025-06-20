@@ -289,7 +289,7 @@ def send_string_interpreter(sendString,talkToCommsServer,talkToArduino):
         talkToCommsServer = False   # close comms with server
     return talkToCommsServer,talkToArduino
 
-
+print(colored('Enter "help" for list of commands', 'magenta'))
 
 # Talking to Comms Server
 while talkToCommsServer:

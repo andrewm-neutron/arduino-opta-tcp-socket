@@ -1,36 +1,18 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Filename: opta-comms-client.py
-Interpreter: C:\\Users\\Squalid\\miniconda3-2025\\envs\\generalenvironment\\python.exe
-Author: Andrew Manning
-Date: 2025-06-17
-Version: 1.0
-Description: 
-    User client for sending commands to Python communications server,
-    which in turn communicates with Arduino Opta PLC
-
-License: MIT License
-Contact: andrewm@ansto.gov.au
-Dependencies: opcua, crypto, cryptography, spyder-kernels==3.0.*, python, 
-    numpy, pandas, termcolor, opcua-client
-    
-OPCUA client GUI for inspecting Arduino Opta PLC
-    C:\\Users\\Squalid\\miniconda3-2025\\envs\\generalenvironment\\Scripts\\opcua-client.exe
-"""
-
 import socket
-import time
-from opcua import Client
-import re
 from termcolor import colored
+import time
+import re
 
 # for the Python-side passing of commands
+#HOST = "127.0.0.1"  # The server's hostname or IP address
 HOST = socket.gethostname() # or just use (host == '')
 PORT = 65432  # The port used by the server
 
-# for Arduino Opta PLC running OPC UA Server
-url = "opc.tcp://192.168.29.180:4840"
+# Flags for different modes of operation
+talkToCommsServer = True
+listenToCommsServer = True
+talkToArduino = False
+listenToArduino = False
 
 # Help info printed to screen
 def help_info():
@@ -41,7 +23,7 @@ def help_info():
     print(colored('quit\t', 'yellow'),colored('- terminates the client but not the server','white'))
     print(colored('arduino\t', 'yellow'),colored('- prints information about Arduino Opta PLC','white'))
     print('\n')
-
+    
 def arduino_info():
     '''
     To access this
@@ -291,9 +273,8 @@ def arduino_info():
         print('\n')   
     else: 
         print(colored('Please enter "1" or "2" next time', 'magenta'))
-        
-
-
+ 
+    
 # Interpreter for user string input to client
 def send_string_interpreter(sendString,talkToCommsServer,talkToArduino):
     if re.search("help", sendString, re.IGNORECASE):
@@ -308,41 +289,21 @@ def send_string_interpreter(sendString,talkToCommsServer,talkToArduino):
         talkToCommsServer = False   # close comms with server
     return talkToCommsServer,talkToArduino
 
-#########################################################
-# This is where the output into the console starts
-#########################################################
 
-talkToCommsServer = True
-talkToArduino = False
-print(colored('Enter "help" for list of commands', 'magenta'))
 
-# send string outputs to Python comms server
+# Talking to Comms Server
 while talkToCommsServer:
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((HOST, PORT))
+        #s.sendall(b"Hello, world")
         sendString = input(colored('Input command: ','cyan'))
         talkToCommsServer,talkToArduino = send_string_interpreter(sendString,talkToCommsServer,talkToArduino)
-        sendBytes = sendString.encode()
-        #s.sendall(b"Hello, world")
+        sendBytes = sendString.encode() # String to bytes
         s.sendall(sendBytes)
         data = s.recv(1024)
-        readString = data.decode()
+        readString = data.decode()      # Bytes to string
         print('   Echo: ' + readString)
         #s.close()
         time.sleep(1)
 
-#print(f"Received {data!r}") 
 print(colored('>: Client successfully finished', 'red'))
-
-       
-            
-
-            
-# # Arduino Opta PLC comms
-# nodeId = "i=50121"
-# client = Client(url)
-# client.connect()
-# node = client.get_node(nodeId)
-# value = node.get_value()
-# print(value)
-# client.disconnect()

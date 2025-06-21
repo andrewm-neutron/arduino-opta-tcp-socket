@@ -41,9 +41,6 @@ def unknown_cmd():
     
 def empty_cmd():
     print(colored('Empty string sent', 'yellow'))
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
     
 def client_readNode(NodeId):
     NodeIdString = str(NodeId)
@@ -69,9 +66,6 @@ def client_writeNode(NodeId,value):
     node.set_data_value(value)
     client.disconnect()
     #return reply
-=======
->>>>>>> 13bc130713e5a3a42d1aa0090c8050b29bf9ad96
->>>>>>> Stashed changes
 
 # Interpreter for user string input from client
 def read_string_interpreter(readString,talkToCommsClient,talkToArduino,listenToCommsClient):
@@ -93,9 +87,6 @@ def read_string_interpreter(readString,talkToCommsClient,talkToArduino,listenToC
         knownCmd = True
         client_quit()
         talkToCommsClient = False   # close comms with server
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
     if re.search("readNode", readString, re.IGNORECASE):
         knownCmd = True
         cmdString = readString.split('(')
@@ -117,9 +108,6 @@ def read_string_interpreter(readString,talkToCommsClient,talkToArduino,listenToC
         nodeToRead = cmdString[0]
         valueToWrite = cmdString[1]
         client_writeNode(nodeToRead,valueToWrite)
-=======
->>>>>>> 13bc130713e5a3a42d1aa0090c8050b29bf9ad96
->>>>>>> Stashed changes
     # if not knownCmd:
     #     unknown_cmd()
     return talkToCommsClient,talkToArduino,listenToCommsClient

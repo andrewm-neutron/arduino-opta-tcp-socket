@@ -22,6 +22,8 @@ def help_info():
     print(colored('stop\t', 'yellow'),colored('- terminates the client and server','white'))
     print(colored('quit\t', 'yellow'),colored('- terminates the client but not the server','white'))
     print(colored('arduino\t', 'yellow'),colored('- prints information about Arduino Opta PLC','white'))
+    print(colored('readNode(NodeID)\t', 'yellow'),colored('- reads contents of Arduino Opta PLC at NodeID','white'))
+    print(colored('writeNode(NodeID,value)\t', 'yellow'),colored('- writes value of Arduino Opta PLC at NodeID','white'))
     print('\n')
     
 def arduino_info():

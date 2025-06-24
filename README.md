@@ -1,5 +1,5 @@
 # arduino-opta-tcp-socket
-Python code to communicate with Arduino Opta PLC running OPC UA server with TCP socket.
+Python code to communicate with Arduino Opta PLC running an [OPC UA](https://opcfoundation.org/about/opc-technologies/opc-ua/) server with TCP socket.
 
 Purpose:
 - Allow remote control of [Arduino Opta PLC](https://www.arduino.cc/pro/hardware-arduino-opta/) and connected expansion modules via TCP socket over Ethernet with Python.
@@ -16,7 +16,7 @@ Purpose:
 
 To run:
 - Open and run `echo-server-andrewm.py` first.
-- Then open and run `echo-client.andrewm.py`.
+- Then open and run `echo-client-andrewm.py`.
 - Type commands into the latter, and see the former respond. 
 
 ## Second iteration
